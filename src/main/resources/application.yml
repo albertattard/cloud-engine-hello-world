@@ -1,0 +1,9 @@
+micronaut:
+  application:
+    name: cloud-engine-hello-world
+datasources:
+  default:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driverClassName: org.postgresql.Driver

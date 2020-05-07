@@ -1,0 +1,22 @@
+version: "3"
+services:
+  postgres:
+    container_name: test_db
+    image: postgres:11.1
+    restart: unless-stopped
+    networks:
+      - test-net
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "test_db"
+      POSTGRES_PASSWORD: "test_db"
+      POSTGRES_DB: "test_db"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres", "-d", "gogs"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+networks:
+  test-net:
+    driver: bridge
