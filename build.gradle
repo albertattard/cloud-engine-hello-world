@@ -12,10 +12,6 @@ repositories {
   jcenter()
 }
 
-configurations {
-  developmentOnly
-}
-
 dependencies {
   def kotlin = "1.3.72"
   def micronaut = "2.0.0.M3"
@@ -62,14 +58,19 @@ dependencies {
   testImplementation("io.kotlintest:kotlintest-runner-junit5:$kotlintestRunner")
 }
 
-test.classpath += configurations.developmentOnly
-
 mainClassName = "com.albertattard.Application"
 
 test {
   useJUnitPlatform()
   testLogging {
     events = ['FAILED', 'PASSED', 'SKIPPED', 'STANDARD_OUT']
+  }
+
+  doFirst{
+    file('.env').readLines().each() {
+      def (key, value) = it.tokenize('=')
+      environment key, value
+    }
   }
 }
 
@@ -100,6 +101,5 @@ shadowJar {
 }
 
 tasks.withType(JavaExec) {
-  classpath += configurations.developmentOnly
   jvmArgs('-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
 }

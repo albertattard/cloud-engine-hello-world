@@ -3,7 +3,7 @@
 ## Environment Variables
 
 | Name                | Example                                    |
-|---------------------|--------------------------------------------|
+| ------------------- | ------------------------------------------ |
 | `DATABASE_URL`      | `jdbc:postgresql://localhost:5432/test_db` |
 | `DATABASE_USERNAME` | `test_db`                                  |
 | `DATABASE_PASSWORD` | `test_db`                                  |
@@ -18,13 +18,10 @@ Create Fat JAR
 $ ./gradlew clean shadowJar
 ```
 
-**Tests are not executed** and no environment variables are required.  Use the `build` task to create the fat JAR and also run the tests.
+**Tests are not executed** and no environment variables are required. Use the `build` task to create the fat JAR and also run the tests.
 
 ```bash
-$ DATABASE_URL="jdbc:postgresql://localhost:5432/test_db" \
-  DATABASE_USERNAME="test_db" \
-  DATABASE_PASSWORD="test_db" \
-  ./gradlew clean build
+$ ./gradlew clean build
 ```
 
 To run the project

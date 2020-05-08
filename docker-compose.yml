@@ -6,14 +6,16 @@ services:
     restart: unless-stopped
     networks:
       - test-net
+    env_file:
+      - .env
     ports:
-      - "5432:5432"
+      - ${DATABASE_PORT}:5432
     environment:
-      POSTGRES_USER: "test_db"
-      POSTGRES_PASSWORD: "test_db"
-      POSTGRES_DB: "test_db"
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "postgres", "-d", "gogs"]
+      test: ["CMD", "pg_isready", "-U", "postgres", "-d", "${DATABASE_NAME}"]
       interval: 10s
       timeout: 5s
       retries: 5
