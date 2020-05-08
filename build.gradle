@@ -6,6 +6,7 @@ plugins {
   id "org.jetbrains.kotlin.plugin.allopen" version "1.3.72"
 
   id "com.github.johnrengelman.shadow" version "5.2.0"
+  id "com.github.ben-manes.versions" version "0.28.0"
 }
 
 repositories {
@@ -15,14 +16,14 @@ repositories {
 dependencies {
   def kotlin = "1.3.72"
   def micronaut = "2.0.0.M3"
-  def jacksonModuleKotlin = "2.11.0.rc1"
+  def jacksonModuleKotlin = "2.11.0"
   def logbackClassic = "1.2.3"
   def logbackJson = "0.1.5"
-  def hikari = "3.4.2"
+  def hikari = "3.4.5"
   def exposed = "0.17.7"
   def postgresql = "42.2.12"
-  def mockk = "1.9.3"
-  def kotlintest = "1.1.5"
+  def mockk = "1.10.0"
+  def kotlintest = "1.2.0.RC1"
   def kotlintestRunner = "3.4.0"
 
   kapt(enforcedPlatform("io.micronaut:micronaut-bom:$micronaut"))
@@ -39,6 +40,7 @@ dependencies {
   implementation("io.micronaut:micronaut-http-client")
   runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonModuleKotlin")
 
+  /* Logging */
   runtimeOnly("ch.qos.logback:logback-classic:$logbackClassic")
   runtimeOnly("ch.qos.logback.contrib:logback-jackson:$logbackJson")
   runtimeOnly("ch.qos.logback.contrib:logback-json-classic:$logbackJson")
@@ -74,6 +76,15 @@ test {
   }
 }
 
+run {
+  doFirst{
+    file('.env').readLines().each() {
+      def (key, value) = it.tokenize('=')
+      environment key, value
+    }
+  }
+}
+
 java {
   sourceCompatibility = JavaVersion.VERSION_1_8
 }
@@ -89,6 +100,7 @@ compileKotlin {
     javaParameters = true
   }
 }
+
 compileTestKotlin {
   kotlinOptions {
     jvmTarget = JavaVersion.VERSION_1_8
