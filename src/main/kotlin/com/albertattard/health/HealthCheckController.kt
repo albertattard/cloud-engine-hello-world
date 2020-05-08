@@ -10,5 +10,4 @@ class HealthCheckController {
   @Get("/", produces = [MediaType.APPLICATION_JSON])
   fun here(): Map<String, String> =
     mapOf("Hello?" to "I'm alive!!")
-
 }

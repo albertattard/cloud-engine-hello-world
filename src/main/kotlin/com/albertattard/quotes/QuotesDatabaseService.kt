@@ -1,9 +1,9 @@
 package com.albertattard.quotes
 
+import javax.inject.Singleton
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
-import javax.inject.Singleton
 
 @Singleton
 class QuotesDatabaseService(private val database: Database) : QuotesService {

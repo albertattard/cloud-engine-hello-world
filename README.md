@@ -1,5 +1,11 @@
 # Cloud Engine Hello World
 
+Tech-stack
+
+1. [Micronaut](https://micronaut.io/)
+1. [Kotest (a.k.a. Kotlintest)](https://github.com/kotest/kotest)
+1. [Exposed](https://github.com/JetBrains/Exposed)
+
 ## Environment Variables
 
 | Name                | Example                                    |

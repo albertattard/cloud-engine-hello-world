@@ -46,6 +46,6 @@ object DatabaseHelper {
       CreatedQuote(id = it.value)
     }
 
-  fun countQuotes(): Int =
+  fun countQuotes(): Long =
     QuotesTable.selectAll().count()
 }
